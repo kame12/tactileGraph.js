@@ -45,6 +45,24 @@ function makeLQ(numArray) {   ///第1四分位数
   var mlq ="initial";
   numArray = numArray.sort(compare);  //昇順
 
+ if(numArray.length <== 1) {
+ 
+ }
+  
+ if(numArray.length === 2) {
+   var max = numArray[1];
+   var min = numArray[0];
+ }
+  console.log("a");
+  
+ if(numArray.length === 3) {   
+   var max = numArray[2];
+   var med = numArray[1];
+   var min = numArray[0];
+   onsole.log("b");
+ }
+ 
+ /* if(numArray.length >== 4) { */
  if(numArray.length % 2 === 0) {
    if((numArray.length/2) % 2 === 0) {
      var num1 = (numArray.length / 4);
@@ -61,10 +79,12 @@ function makeLQ(numArray) {   ///第1四分位数
      var num4 = Math.floor(numArray.length / 4);
      var num5 = Math.floor(numArray.length / 4) - 1;
      mlq = (numArray[num4] + numArray[num5]) / 2;
+     onsole.log("c");
    } else if(Math.floor(numArray.length / 2) % 2 !== 0) {
      var num6 = Math.floor(numArray.length / 4);
      mlq = numArray[num6];
    }
+   
  }
   //console.log(mlq);
   return mlq;
