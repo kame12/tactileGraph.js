@@ -45,43 +45,53 @@ function makeLQ(numArray) {   ///第1四分位数
   var mlq ="initial";
   numArray = numArray.sort(compare);  //昇順
 
- if(numArray.length <== 1) {
+ if(numArray.length === 1) {
+console.log("aa");
+   return numArray[0];
  
  }
   
  if(numArray.length === 2) {
    var max = numArray[1];
    var min = numArray[0];
+   var med = (numArray[0] + numArray[1]) / 2;
+ console.log("a");
  }
-  console.log("a");
+  
   
  if(numArray.length === 3) {   
    var max = numArray[2];
    var med = numArray[1];
    var min = numArray[0];
-   onsole.log("b");
+   console.log("b");
  }
  
- /* if(numArray.length >== 4) { */
  if(numArray.length % 2 === 0) {
+console.log("a1");
    if((numArray.length/2) % 2 === 0) {
      var num1 = (numArray.length / 4);
      var num2 = (numArray.length / 4) - 1;
      mlq = (numArray[num1] + numArray[num2]) / 2;
-   }
+console.log("2a");   
+}
    else if(numArray.length/2 % 2 !== 0) {
      var num3 = Math.floor(numArray.length / 4);
      mlq = numArray[num3];
-   }
+console.log("a3"); 
+  }
  }
  else if(numArray.length % 2 !== 0) {
-   if(Math.floor(numArray.length/ 2) % 2 === 0) {
+console.log("a4");  
+ if(Math.floor(numArray.length/ 2) % 2 === 0) {
      var num4 = Math.floor(numArray.length / 4);
      var num5 = Math.floor(numArray.length / 4) - 1;
      mlq = (numArray[num4] + numArray[num5]) / 2;
-     onsole.log("c");
+     console.log("c");
+console.log("num4 is" + num4);
+console.log("num5 is" + num5);
    } else if(Math.floor(numArray.length / 2) % 2 !== 0) {
-     var num6 = Math.floor(numArray.length / 4);
+console.log("a5");   
+  var num6 = Math.floor(numArray.length / 4);
      mlq = numArray[num6];
    }
    
@@ -96,6 +106,27 @@ function makeUQ(numArray) {   ///第3四分位数
   }
   var uq ="initial";
   numArray = numArray.reverse(compare);  //降順
+
+   if(numArray.length === 1) {
+console.log("aa");
+   return numArray[0];
+ 
+ }
+  
+ if(numArray.length === 2) {
+   var max = numArray[1];
+   var min = numArray[0];
+   var med = (numArray[0] + numArray[1]) / 2;
+ console.log("a");
+ }
+  
+  
+ if(numArray.length === 3) {   
+   var max = numArray[2];
+   var med = numArray[1];
+   var min = numArray[0];
+   console.log("b");
+ }
   if(numArray.length % 2 === 0) {
     if((numArray.length/2) % 2 === 0) {
       var num1 = (numArray.length / 4);
@@ -141,6 +172,7 @@ function drawGraph(){//////// ＊ここからが実行開始////////////////////
   tg.clear; //既に書いてある内容をクリア
   arr = createArray(txt.value);  //テキストエリアの中身
   numArray = createnumArray(arr); 
+  max = min = lq = uq = med = [];
   for(var i = 0; i<numArray.length; i++) { //各要素の配列を作成
       //console.log(numArray[i]);
       var ma = Math.max.apply(null,numArray[i]);
