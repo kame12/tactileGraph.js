@@ -172,7 +172,11 @@ function drawGraph(){//////// ＊ここからが実行開始////////////////////
   tg.clear; //既に書いてある内容をクリア
   arr = createArray(txt.value);  //テキストエリアの中身
   numArray = createnumArray(arr); 
-  max = min = lq = uq = med = [];
+  max = [];
+  min = [];
+  lq = [];
+  uq = [];
+  med = [];
   for(var i = 0; i<numArray.length; i++) { //各要素の配列を作成
       //console.log(numArray[i]);
       var ma = Math.max.apply(null,numArray[i]);
