@@ -201,6 +201,19 @@ console.log(med);
 tg.drawLine(100, 300, 100, 500);   //縦軸//
 tg.drawLine(100, 300, 500, 300);   //横軸//
 
+var top =  ;
+var bottom = ;
+var h = bottom - top;
+var MAX = [];
+
+for(var i=0; i < numArray.length; i++) { //最大値
+    MAX[i] = Math.max.apply(null, numArray[i]);
+    tg.drawLine(x, bottom-h*max[i]/MAX[i], x, bottom-h*max[i]/MAX[i]);
+}
+for(var i=0; i < numArray.length; i++) { //最小値
+    MAX[i] = Math.min.apply(null, numArray[i]);
+    tg.drawLine(x, bottom-h*min[i]/MAX[i], x, bottom-h*min[i]/MAX[i]);
+}
 
 
 
