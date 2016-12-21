@@ -169,7 +169,7 @@ function makeMed(numArray) {  /// 中央値
 
 
 function drawGraph(){//////// ＊ここからが実行開始///////////////////////
-  tg.clear; //既に書いてある内容をクリア
+  tg.clear(); //既に書いてある内容をクリア
   arr = createArray(txt.value);  //テキストエリアの中身
   numArray = createnumArray(arr); 
   max = [];
