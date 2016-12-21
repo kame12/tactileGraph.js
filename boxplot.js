@@ -198,21 +198,21 @@ console.log(med);
 
 /////////////////////////// 以下にグラフの描画処理///////////////////////////////
 
-tg.drawLine(100, 300, 100, 500);   //縦軸//
-tg.drawLine(100, 300, 500, 300);   //横軸//
+//tg.drawLine(100, 300, 100, 500);   //縦軸//
+//tg.drawLine(100, 300, 500, 300);   //横軸//
 
-var top =  ;
-var bottom = ;
+var top = 50 ;
+var bottom = 600;
 var h = bottom - top;
-var MAX = [];
-
-for(var i=0; i < numArray.length; i++) { //最大値
-    MAX[i] = Math.max.apply(null, numArray[i]);
-    tg.drawLine(x, bottom-h*max[i]/MAX[i], x, bottom-h*max[i]/MAX[i]);
-}
-for(var i=0; i < numArray.length; i++) { //最小値
-    MAX[i] = Math.min.apply(null, numArray[i]);
-    tg.drawLine(x, bottom-h*min[i]/MAX[i], x, bottom-h*min[i]/MAX[i]);
+var MAX = Math.max.apply(null, max);
+var x =100;
+var w = 100;
+for(var i=0; i < numArray.length; i++) { 
+    console.log(bottom-h*max[i]/MAX);
+    var y= bottom-h*max[i]/MAX;
+    tg.drawLine(x+w*i, y, x+100+w*i, y); //最大値
+    y = bottom-h*min[i]/MAX;
+    tg.drawLine(x+w*i, y, x+100+w*i, y); //最小値
 }
 
 
