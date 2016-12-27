@@ -205,8 +205,8 @@ var top = 50 ;
 var bottom = 600;
 var h = bottom - top;
 var MAX = Math.max.apply(null, max);
-var x =80;
-var w = 80;
+var x =20;
+var w = 20;
 for(var i=0; i < numArray.length; i++) { 
     console.log(bottom-h*max[i]/MAX);
     var y= bottom-h*max[i]/MAX;
