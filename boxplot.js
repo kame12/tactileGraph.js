@@ -205,21 +205,20 @@ var top = 50 ;
 var bottom = 600;
 var h = bottom - top;
 var MAX = Math.max.apply(null, max);
-var x =100;
-var w = 100;
+var x =80;
+var w = 80;
 for(var i=0; i < numArray.length; i++) { 
     console.log(bottom-h*max[i]/MAX);
     var y= bottom-h*max[i]/MAX;
     tg.drawLine(x+w*i, y, x+100+w*i, y); //最大値
     var y = bottom-h*min[i]/MAX;
     tg.drawLine(x+w*i, y, x+100+w*i, y); //最小値
-    var y = bottom-h*uq[i]/MAX;
-   /* tg.drawLine(x+w*i, y, x+100+w*i, y); //第1四分位
+    /*var y = bottom-h*uq[i]/MAX;
+    tg.drawLine(x+w*i, y, x+100+w*i, y); //第1四分位
     var y = bottom-h*lq[i]/MAX;
     tg.drawLine(x+w*i, y, x+100+w*i, y); //第3四分位
     var y = bottom-h*med[i]/MAX;
-    tg.drawLine(x+w*i, y, x+100+w*i, y); //中央値 */
-    
+    tg.drawLine(x+w*i, y, x+100+w*i, y); //中央値 */    
 }
 
 
