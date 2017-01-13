@@ -262,7 +262,7 @@ for(var i=0; i < len; i++) {
 
 
 
-
+}
 
 
 //////////////////////////////// ここまで ///////////////////////////////////////
@@ -275,7 +275,7 @@ var edl = document.querySelector('#edl');
 var esa = document.querySelector('#esa');
 
 edl.onclick = function() {
-  var blob = new Blob([ graph.loadEdl() ], { "type" : "text/plain" });
+  var blob = new Blob([ tg.loadEdl() ], { "type" : "text/plain" });
   if (window.navigator.msSaveBlob) { 
     window.navigator.msSaveBlob(blob, filename + ".edl"); 
   } else {
@@ -285,7 +285,7 @@ edl.onclick = function() {
 }
 
 esa.onclick = function(){
-  imgURL = graph.map2esa();
+  imgURL = tg.map2esa();
   var bin = atob(imgURL.split(',')[1]);
   var buffer = new Uint8Array(bin.length);
   for (var i = 0; i < bin.length; i++) {
