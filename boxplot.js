@@ -205,20 +205,53 @@ var top = 50 ;
 var bottom = 600;
 var h = bottom - top;
 var MAX = Math.max.apply(null, max);
-var x =20;
-var w = 20;
-for(var i=0; i < numArray.length; i++) { 
+var len = numArray.length;
+var x = 50;
+var w = (599-x)/len;
+var s = w*0.2;
+ 
+for(var i=0; i < len; i++) { 
     console.log(bottom-h*max[i]/MAX);
-    var y= bottom-h*max[i]/MAX;
-    tg.drawLine(x+w*i, y, x+100+w*i, y); //最大値
-    var y = bottom-h*min[i]/MAX;
-    tg.drawLine(x+w*i, y, x+100+w*i, y); //最小値
-    /*var y = bottom-h*uq[i]/MAX;
-    tg.drawLine(x+w*i, y, x+100+w*i, y); //第1四分位
-    var y = bottom-h*lq[i]/MAX;
-    tg.drawLine(x+w*i, y, x+100+w*i, y); //第3四分位
-    var y = bottom-h*med[i]/MAX;
-    tg.drawLine(x+w*i, y, x+100+w*i, y); //中央値 */    
+    var y1= bottom-h*max[i]/MAX;
+    tg.drawLine(w*i, y1, w*(i+1)-s, y1);//最大値
+    var y2 = bottom-h*min[i]/MAX;
+    tg.drawLine(w*i, y2, w*(i+1)-s, y2);//最小値
+    var y3 = bottom-h*uq[i]/MAX;
+    tg.drawLine(w*i, y3, w*(i+1)-s, y3); //第1四分位
+    var y4 = bottom-h*lq[i]/MAX;
+    tg.drawLine(w*i, y4, w*(i+1)-s, y4); //第3四分位
+    var y5 = bottom-h*med[i]/MAX;
+    tg.drawLine(w*i, y5, w*(i+1)-s, y5); //中央値 
+    
+    tg.drawLine(w*i+(w-s)/2, y1, w*i+(w-s)/2, y3); //半歩ずれ(遅れ)
+    tg.drawLine(w*i, y3, w*i, y4); //問題なし
+    tg.drawLine(w*(i+1)-s, y3, w*(i+1)-s, y4);  //問題なし
+    tg.drawLine(w*i+(w-s)/2, y4, w*i+(w-s)/2, y2); //半歩ずれ(遅れ)var top = 50 ;
+var bottom = 600;
+var h = bottom - top;
+var MAX = Math.max.apply(null, max);
+var len = numArray.length;
+var x = 50;
+var w = (599-x)/len;
+var s = w*0.2;
+ 
+for(var i=0; i < len; i++) { 
+    console.log(bottom-h*max[i]/MAX);
+    var y1= bottom-h*max[i]/MAX;
+    tg.drawLine(w*i, y1, w*(i+1)-s, y1);//最大値
+    var y2 = bottom-h*min[i]/MAX;
+    tg.drawLine(w*i, y2, w*(i+1)-s, y2);//最小値
+    var y3 = bottom-h*uq[i]/MAX;
+    tg.drawLine(w*i, y3, w*(i+1)-s, y3); //第1四分位
+    var y4 = bottom-h*lq[i]/MAX;
+    tg.drawLine(w*i, y4, w*(i+1)-s, y4); //第3四分位
+    var y5 = bottom-h*med[i]/MAX;
+    tg.drawLine(w*i, y5, w*(i+1)-s, y5); //中央値 
+    
+    tg.drawLine(w*i+(w-s)/2, y1, w*i+(w-s)/2, y3); //半歩ずれ(遅れ)
+    tg.drawLine(w*i, y3, w*i, y4); //問題なし
+    tg.drawLine(w*(i+1)-s, y3, w*(i+1)-s, y4);  //問題なし
+    tg.drawLine(w*i+(w-s)/2, y4, w*i+(w-s)/2, y2); //半歩ずれ(遅れ)
 }
 
 
