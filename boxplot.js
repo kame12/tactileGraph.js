@@ -244,7 +244,7 @@ tg.drawBraille(scale, 30, 45);
 
 /////////////////////////////////////////////////
 //////////////以下、ダウンロード用の設定////////
-var filename = "Graph";
+var filename = "box plot";
 var edl = document.querySelector('#edl');
 var esa = document.querySelector('#esa');
 
