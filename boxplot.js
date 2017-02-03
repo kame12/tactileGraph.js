@@ -1,6 +1,7 @@
 var file = document.querySelector('#getfile'); //htmlの「ファイルを開く」のIDを設定
 var txt = document.querySelector('#txt');      //htmlのテキストエリアのIDを設定
 var tg = tactileGraphic(); // tactileGraph.jsの設定
+var cp = capsule('b');
 tg.setCanvas('a');         // HTMLのCanvasのIDを設定
 var arr=[];        //初期配列
 var numArray = []; //数値のみの配列
@@ -253,31 +254,62 @@ tg.drawLine(100,180,600,180);
 tg.drawLine(100,320,600,320);
 tg.drawLine(100,460,600,460);
 
-//////////////////////////////// 立体コピー用の設定 ////////////////////////
-var cvs = document.getElementById('b');
-var cx = cvs.getContext('2d');
+/////////////////////////// 以下に立体コピーの描画処理///////////////////////////////
+/*tg.drawBraiile("boxplot",10,5); */
+cp.drawLine(100, 30, 100, 630);   //縦軸//
+cp.drawLine(85, 600, 600, 600);   //横軸//
 
-cx.font= 'bold 53px "Ikarashi Braille"';
+var len = numArray.length;
+var top = 70;	
+var bottom = 600;
+var h = bottom - top;
+var MAX = Math.max.apply(null, max);
 
-//////////////////////////////// 立体コピー用の描画処理 ////////////////////////
+var hoge = cp.drawBraille(filename,0,0);
+console.log(hoge); 
+var x = 150;
+var w = (599-x)/len;
+var s = w*0.2;
+var DS = 0; //点間隔
+ 
+for(var i=0; i < len; i++) { 
+    console.log(bottom-h*max[i]/MAX);
+    var y1= bottom-h*max[i]/MAX;
+    cp.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
+    var y2 = bottom-h*min[i]/MAX;
+    cp.drawLine(w*i+x, y2, w*(i+1)-s+x, y2);//最小値
+    var y3 = bottom-h*uq[i]/MAX;
+    cp.drawLine(w*i+x, y3, w*(i+1)-s+x, y3); //第1四分位
+    var y4 = bottom-h*lq[i]/MAX;
+    cp.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
+    var y5 = bottom-h*med[i]/MAX;
+    cp.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値 
+if(y1 < y5 + 6)
+    
+    cp.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS); 
+    cp.drawLine(w*i+x, y3, w*i+x, y4); 
+    cp.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);  
+    cp.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS); 
+    cp.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620);
+    cp.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);
+}
 
-cx.lineWidth = 1; //グリッド線
-cx.beginPath();
-cx.moveTo(85, 40);cx.lineTo(100, 40);
-cx.moveTo(85, 320);cx.lineTo(100, 320);
-cx.stroke();
-cx.fillText(scale, 30, 40);
-cx.fillText(Math.floor(scale/2), 30, 320);
+var scale = 0;  //グラフ目盛
+if(MAX < 1)scale=1;
+if(1 <= MAX && MAX < 5)scale=5;
+if(5 <= MAX && MAX < 10)scale=10;
+if(10 <= MAX)scale=10+5*(Math.floor((MAX-10)/5)+1);
 
-cx.lineWidth = 0.5; //グリッド線
-cx.beginPath();
-cx.moveTo(100, 40);cx.lineTo(600, 40);
-cx.moveTo(100, 180);cx.lineTo(600, 180);
-cx.moveTo(100, 320);cx.lineTo(600, 320);
-cx.moveTo(100, 460);cx.lineTo(600, 460);
-cx.stroke();
+cp.drawLine(85,40,100,40);
+cp.drawLine(85,320,100,320);
+cp.drawBraille(scale, 30, 40);
+cp.drawBraille(Math.floor(scale/2), 30, 320);
 
-
+cp.setDot(0);
+cp.drawLine(100,40,600,40); //グリッド線
+cp.drawLine(100,180,600,180);
+cp.drawLine(100,320,600,320);
+cp.drawLine(100,460,600,460);
 //////////////////////////////// ここまで ///////////////////////////////////////
 }
 
@@ -286,6 +318,7 @@ cx.stroke();
 var filename = "box plot";
 var edl = document.querySelector('#edl');
 var esa = document.querySelector('#esa');
+var capsule = document.querySelector('#capsule');
 
 edl.onclick = function() {
   var blob = new Blob([ graph.loadEdl() ], { "type" : "text/plain" });
@@ -311,6 +344,23 @@ esa.onclick = function(){
   } else {
     esa.download =  filename + ".png";
     esa.href = window.URL.createObjectURL(blob);
+  }
+}
+
+capsule.onclick = function(){
+  imgURL = cp.loadImage();
+  console.log(imgURL);
+  var bin = atob(imgURL.split(',')[1]);
+  var buffer = new Uint8Array(bin.length);
+  for (var i = 0; i < bin.length; i++) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+  var blob = new Blob([buffer.buffer], {type: 'image/png'});
+  if (window.navigator.msSaveBlob) {
+  window.navigator.msSaveBlob(blob, filename + '.png'); 
+  } else {
+    capsule.download =  filename + ".png";
+    capsule.href = window.URL.createObjectURL(blob);
   }
 }
 
