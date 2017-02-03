@@ -249,9 +249,34 @@ tg.drawBraille(Math.floor(scale/2), 30, 320);
 
 tg.setDot(0);
 tg.drawLine(100,40,600,40); //グリッド線
-tg.drawLine(100,180,600,180);  
+tg.drawLine(100,180,600,180);
 tg.drawLine(100,320,600,320);
 tg.drawLine(100,460,600,460);
+
+//////////////////////////////// 立体コピー用の設定 ////////////////////////
+var cvs = document.getElementById('b');
+var cx = cvs.getContext('2d');
+
+cx.font= 'bold 53px "Ikarashi Braille"';
+
+//////////////////////////////// 立体コピー用の描画処理 ////////////////////////
+
+cx.lineWidth = 1; //グリッド線
+cx.beginPath();
+cx.moveTo(85, 40);cx.lineTo(100, 40);
+cx.moveTo(85, 320);cx.lineTo(100, 320);
+cx.stroke();
+cx.fillText(scale, 30, 40);
+cx.fillText(Math.floor(scale/2), 30, 320);
+
+cx.lineWidth = 0.5; //グリッド線
+cx.beginPath();
+cx.moveTo(100, 40);cx.lineTo(600, 40);
+cx.moveTo(100, 180);cx.lineTo(600, 180);
+cx.moveTo(100, 320);cx.lineTo(600, 320);
+cx.moveTo(100, 460);cx.lineTo(600, 460);
+cx.stroke();
+
 
 //////////////////////////////// ここまで ///////////////////////////////////////
 }
