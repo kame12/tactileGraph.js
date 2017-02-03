@@ -197,38 +197,43 @@ console.log(uq);
 console.log(med);
 
 /////////////////////////// 以下にグラフの描画処理///////////////////////////////
-
-tg.drawLine(100, 40, 100, 630);   //縦軸//
+/*tg.drawBraiile("boxplot",10,5); */
+tg.drawLine(100, 30, 100, 630);   //縦軸//
 tg.drawLine(85, 600, 600, 600);   //横軸//
 
-var top = 50 ;
+var len = numArray.length;
+var top = 70;	
 var bottom = 600;
 var h = bottom - top;
 var MAX = Math.max.apply(null, max);
-var len = numArray.length;
-var x = 120;
+
+var hoge = tg.drawBraille(filename,0,0);
+console.log(hoge); 
+var x = 150;
 var w = (599-x)/len;
 var s = w*0.2;
+var DS = 6; //点間隔
  
 for(var i=0; i < len; i++) { 
     console.log(bottom-h*max[i]/MAX);
     var y1= bottom-h*max[i]/MAX;
-    tg.drawLine(w*i, y1, w*(i+1)-s, y1);//最大値
+    tg.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
     var y2 = bottom-h*min[i]/MAX;
-    tg.drawLine(w*i, y2, w*(i+1)-s, y2);//最小値
+    tg.drawLine(w*i+x, y2, w*(i+1)-s+x, y2);//最小値
     var y3 = bottom-h*uq[i]/MAX;
-    tg.drawLine(w*i, y3, w*(i+1)-s, y3); //第1四分位
+    tg.drawLine(w*i+x, y3, w*(i+1)-s+x, y3); //第1四分位
     var y4 = bottom-h*lq[i]/MAX;
-    tg.drawLine(w*i, y4, w*(i+1)-s, y4); //第3四分位
+    tg.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     var y5 = bottom-h*med[i]/MAX;
-    tg.drawLine(w*i, y5, w*(i+1)-s, y5); //中央値 
+    tg.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値 
+if(y1 < y5 + 6)
     
-    tg.drawLine(w*i+(w-s)/2+x, y1, w*i+(w-s)/2+x, y3); 
+    tg.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS); 
     tg.drawLine(w*i+x, y3, w*i+x, y4); 
     tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);  
-    tg.drawLine(w*i+(w-s)/2+x, y4, w*i+(w-s)/2+x, y2); 
+    tg.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS); 
     tg.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620);
-    tg.drawBraille(arr[i][0], w*i+(w-s)/2+x-10, 630);
+    tg.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);
 }
 
 var scale = 0;  //グラフ目盛
@@ -236,9 +241,18 @@ if(MAX < 1)scale=1;
 if(1 <= MAX && MAX < 5)scale=5;
 if(5 <= MAX && MAX < 10)scale=10;
 if(10 <= MAX)scale=10+5*(Math.floor((MAX-10)/5)+1);
-tg.drawLine(85,45,100,45);
-tg.drawBraille(scale, 30, 45);
-  
+
+tg.drawLine(85,40,100,40);
+tg.drawLine(85,320,100,320);
+tg.drawBraille(scale, 30, 40);
+tg.drawBraille(Math.floor(scale/2), 30, 320);
+
+tg.setDot(0);
+tg.drawLine(100,40,600,40); //グリッド線
+tg.drawLine(100,180,600,180);  
+tg.drawLine(100,320,600,320);
+tg.drawLine(100,460,600,460);
+
 //////////////////////////////// ここまで ///////////////////////////////////////
 }
 
@@ -249,7 +263,7 @@ var edl = document.querySelector('#edl');
 var esa = document.querySelector('#esa');
 
 edl.onclick = function() {
-  var blob = new Blob([ tg.loadEdl() ], { "type" : "text/plain" });
+  var blob = new Blob([ graph.loadEdl() ], { "type" : "text/plain" });
   if (window.navigator.msSaveBlob) { 
     window.navigator.msSaveBlob(blob, filename + ".edl"); 
   } else {
@@ -288,7 +302,7 @@ file.onchange = function (){   //ファイル選択時に呼ばれる
       var uniArray = Encoding.convert(array, 'UNICODE','AUTO');//配列を「ユニコード」に変換
       var result = Encoding.codeToString(uniArray);  
       txt.value = result; //読み込んだファイルの文字列をテキストエリアに書き込む
-      drawgraph();         //＊ファイルを読み込み終わったら実行
+      drawGraph();         //＊ファイルを読み込み終わったら実行
     }
 };
 
