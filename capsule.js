@@ -7,10 +7,17 @@ var capsule = function(id){
   cx.fillStyle = "white";
   cx.fillRect(0,0,1654,2339);
   cx.fillStyle = "black";
+  cx.textBaseline = "top";
 
  return {
   drawBraille:function(str, x, y, returnX){
     cx.fillText( str, x*RATIO, y*RATIO);
+    
+    cx.fillStyle = "blue";
+    cx.font= 'bold 53px "メイリオ"';
+    cx.fillText( str, x*RATIO, y*RATIO + 40);
+    cx.font= 'bold 53px "Ikarashi Braille"';
+    cx.fillStyle = "black";
   },
 
   drawLine:function(x1, y1, x2, y2) {
