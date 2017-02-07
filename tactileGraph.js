@@ -177,8 +177,8 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
               .replace(/([0-9０１２３４５６７８９])数/g, "$1") //数符の直前に数字があったら、その数符を取り除く
                .replace(/数数/g, "数")                         //数符の連続があればそれを解消する
                 .replace(/([0-9０１２３４５６７８９])([ろロﾛＪJｊjあアｱＡAａaいイｲＢBｂbうウｳＣCｃcるルﾙＤDｄdらラﾗＥEｅeれレﾚＧGｇgえエｴＦFｆfりリﾘＨHｈhおオｵＩIｉi])/g, "$1_$2");
-                                                               //数字の直後にア行とラ行、AからJまでのアルファベットがあったら間に繋ぎ符を挿入する
-    for(var i = 0 ; i < arr.length ; i++){ //>配列の変換
+                             //数字の直後にア行、ラ行、AからJまでのアルファベットがあったら間に繋ぎ符を挿入する
+    for(var i = 0; i < arr.length; i++){ //>配列の変換
       var regex = new RegExp(arr[i][0], "g");
       str = str.replace(regex,arr[i][1]);
     }

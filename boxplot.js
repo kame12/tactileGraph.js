@@ -223,7 +223,6 @@ for(var i=0; i < len; i++) {
     tg.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     var y5 = bottom-h*med[i]/MAX;
     tg.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値
-if(y1 < y5 + 6)
     tg.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);
     tg.drawLine(w*i+x, y3, w*i+x, y4);
     tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);
@@ -242,7 +241,7 @@ tg.drawLine(85,40,100-DS,40);
 tg.drawLine(85,320,100-DS,320);
 tg.drawBraille(scale, 30, 40);
 tg.drawBraille(Math.floor(scale/2), 30, 320);
-
+tg.setInterval(8);
 tg.setDot(0);
 tg.drawLine(100+DS,40,600,40); //グリッド線
 tg.drawLine(100+DS,180,600,180);
@@ -278,7 +277,6 @@ for(var i=0; i < len; i++) {
     cp.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     var y5 = bottom-h*med[i]/MAX;
     cp.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値
-if(y1 < y5 + 6)
     cp.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);
     cp.drawLine(w*i+x, y3, w*i+x, y4);
     cp.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);
