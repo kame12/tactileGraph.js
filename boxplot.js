@@ -48,7 +48,6 @@ function makeLQ(numArray) {   ///第1四分位数
   numArray = numArray.sort(compare);  //昇順
 
  if(numArray.length === 1) {
-console.log("aa");
    return numArray[0];
  }
 
@@ -56,42 +55,32 @@ console.log("aa");
    var max = numArray[1];
    var min = numArray[0];
    var med = (numArray[0] + numArray[1]) / 2;
- console.log("a");
  }
 
 
- if(numArray.length === 3) {   
+ if(numArray.length === 3) {
    var max = numArray[2];
    var med = numArray[1];
    var min = numArray[0];
-   console.log("b");
  }
 
  if(numArray.length % 2 === 0) {
-console.log("a1");
    if((numArray.length/2) % 2 === 0) {
      var num1 = (numArray.length / 4);
      var num2 = (numArray.length / 4) - 1;
      mlq = (numArray[num1] + numArray[num2]) / 2;
-console.log("2a");   
 }
    else if(numArray.length/2 % 2 !== 0) {
      var num3 = Math.floor(numArray.length / 4);
      mlq = numArray[num3];
-console.log("a3"); 
   }
  }
  else if(numArray.length % 2 !== 0) {
-console.log("a4");  
  if(Math.floor(numArray.length/ 2) % 2 === 0) {
      var num4 = Math.floor(numArray.length / 4);
      var num5 = Math.floor(numArray.length / 4) - 1;
      mlq = (numArray[num4] + numArray[num5]) / 2;
-     console.log("c");
-console.log("num4 is" + num4);
-console.log("num5 is" + num5);
    } else if(Math.floor(numArray.length / 2) % 2 !== 0) {
-console.log("a5");   
   var num6 = Math.floor(numArray.length / 4);
      mlq = numArray[num6];
    }
@@ -115,7 +104,6 @@ function makeUQ(numArray) {   ///第3四分位数
    var max = numArray[1];
    var min = numArray[0];
    var med = (numArray[0] + numArray[1]) / 2;
- console.log("a");
  }
 
  if(numArray.length === 3) {
@@ -188,11 +176,6 @@ function drawGraph(){//////// ＊ここからが実行開始////////////////////
       me = makeMed(numArray[i]);
       med.push(me);
   }
-console.log(max);
-console.log(min);
-console.log(lq);
-console.log(uq);
-console.log(med);
 
 /////////////////////////// 以下にグラフの描画処理///////////////////////////////
 /*tg.drawBraiile("boxplot",10,5); */
@@ -206,11 +189,11 @@ var h = bottom - top;
 var MAX = Math.max.apply(null, max);
 
 var hoge = tg.drawBraille(filename,0,0);
-console.log(hoge); 
 var x = 150;
 var w = (599-x)/len;
-var s = w*0.2;
+var s = w*0.3;
 var DS = 6; //点間隔
+var GS = 8; //グリッド線の間隔
 
 tg.setDot(1);
 for(var i=0; i < len; i++) {
@@ -260,27 +243,31 @@ tg.drawBraille(scale, 30, 40);
 tg.drawBraille(Math.floor(scale/2), 30, 320);
 tg.setInterval(8);
 tg.setDot(0);
+
 var j=0;
-var flag=false;
-for(var i=100; i<600; i+=GS) {
-		if(w*j+x < i) {
-		   if(i > w*(j+1)-s+x) {
-		   	  if(flag = false){
-	    	  j++; flag = true;
-	    	  }	    	  
-	       }
-		   else {flag = false; break; 
-		   }
-	    }
-	      tg.drawDot(i,400);
-	    console.log(j);
-	
+var flag=true;
+for(var i=106; i<600; i+=GS) {
+  if(w*j+x < i) {
+    if(w*(j+1)-s+x < i){
+      if(flag){
+        j++; flag = false;
+      }
+      //5つの値による判定
+        tg.drawDot(i,400);
+    }else{
+        flag = true;
+    }
+  }else{
+    tg.drawDot(i,400);
+  }
+  console.log(j);
 }
+/*
 tg.drawLine(100+DS,40,600,40); //グリッド線
 tg.drawLine(100+DS,180,600,180);
 tg.drawLine(100+DS,320,600,320);
 tg.drawLine(100+DS,460,600,460);
-
+*/
 /////////////////////////// 以下に立体コピーの描画処理///////////////////////////////
 /*tg.drawBraiile("boxplot",10,5); */
 cp.drawLine(100, 30, 100, 630);   //縦軸//
