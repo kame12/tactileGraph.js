@@ -1,8 +1,7 @@
-
 var file = document.querySelector('#getfile'); //htmlの「ファイルを開く」のIDを設定
 var txt = document.querySelector('#txt');      //htmlのテキストエリアのIDを設定
 var tg = tactileGraphic(); // tactileGraph.jsの設定
-tg.setAdjust = true;
+tg.setAdjust(true);
 var cp = capsule('b');
 tg.setCanvas('a');         // HTMLのCanvasのIDを設定
 var arr=[];        //初期配列
@@ -51,24 +50,23 @@ function makeLQ(numArray) {   ///第1四分位数
  if(numArray.length === 1) {
 console.log("aa");
    return numArray[0];
- 
  }
-  
+
  if(numArray.length === 2) {
    var max = numArray[1];
    var min = numArray[0];
    var med = (numArray[0] + numArray[1]) / 2;
  console.log("a");
  }
-  
-  
+
+
  if(numArray.length === 3) {   
    var max = numArray[2];
    var med = numArray[1];
    var min = numArray[0];
    console.log("b");
  }
- 
+
  if(numArray.length % 2 === 0) {
 console.log("a1");
    if((numArray.length/2) % 2 === 0) {
@@ -97,7 +95,6 @@ console.log("a5");
   var num6 = Math.floor(numArray.length / 4);
      mlq = numArray[num6];
    }
-   
  }
   //console.log(mlq);
   return mlq;
@@ -111,20 +108,17 @@ function makeUQ(numArray) {   ///第3四分位数
   numArray = numArray.reverse(compare);  //降順
 
    if(numArray.length === 1) {
-console.log("aa");
    return numArray[0];
- 
  }
-  
+
  if(numArray.length === 2) {
    var max = numArray[1];
    var min = numArray[0];
    var med = (numArray[0] + numArray[1]) / 2;
  console.log("a");
  }
-  
-  
- if(numArray.length === 3) {   
+
+ if(numArray.length === 3) {
    var max = numArray[2];
    var med = numArray[1];
    var min = numArray[0];
@@ -169,7 +163,6 @@ function makeMed(numArray) {  /// 中央値
   }
   return med;
 }
-
 
 function drawGraph(){//////// ＊ここからが実行開始///////////////////////
   tg.clear(); //既に書いてある内容をクリア
@@ -218,9 +211,8 @@ var x = 150;
 var w = (599-x)/len;
 var s = w*0.2;
 var DS = 6; //点間隔
- 
-for(var i=0; i < len; i++) { 
-    console.log(bottom-h*max[i]/MAX);
+
+for(var i=0; i < len; i++) {
     var y1= bottom-h*max[i]/MAX;
     tg.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
     var y2 = bottom-h*min[i]/MAX;
@@ -230,13 +222,12 @@ for(var i=0; i < len; i++) {
     var y4 = bottom-h*lq[i]/MAX;
     tg.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     var y5 = bottom-h*med[i]/MAX;
-    tg.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値 
+    tg.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値
 if(y1 < y5 + 6)
-    
-    tg.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS); 
-    tg.drawLine(w*i+x, y3, w*i+x, y4); 
-    tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);  
-    tg.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS); 
+    tg.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);
+    tg.drawLine(w*i+x, y3, w*i+x, y4);
+    tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);
+    tg.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);
     tg.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620);
     tg.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);
 }
@@ -247,16 +238,16 @@ if(1 <= MAX && MAX < 5)scale=5;
 if(5 <= MAX && MAX < 10)scale=10;
 if(10 <= MAX)scale=10+5*(Math.floor((MAX-10)/5)+1);
 
-tg.drawLine(85,40,100,40);
-tg.drawLine(85,320,100,320);
+tg.drawLine(85,40,100-DS,40);
+tg.drawLine(85,320,100-DS,320);
 tg.drawBraille(scale, 30, 40);
 tg.drawBraille(Math.floor(scale/2), 30, 320);
 
 tg.setDot(0);
-tg.drawLine(100,40,600,40); //グリッド線
-tg.drawLine(100,180,600,180);
-tg.drawLine(100,320,600,320);
-tg.drawLine(100,460,600,460);
+tg.drawLine(100+DS,40,600,40); //グリッド線
+tg.drawLine(100+DS,180,600,180);
+tg.drawLine(100+DS,320,600,320);
+tg.drawLine(100+DS,460,600,460);
 
 /////////////////////////// 以下に立体コピーの描画処理///////////////////////////////
 /*tg.drawBraiile("boxplot",10,5); */
@@ -264,7 +255,7 @@ cp.drawLine(100, 30, 100, 630);   //縦軸//
 cp.drawLine(85, 600, 600, 600);   //横軸//
 
 var len = numArray.length;
-var top = 70;	
+var top = 70;
 var bottom = 600;
 var h = bottom - top;
 var MAX = Math.max.apply(null, max);
@@ -275,9 +266,8 @@ var x = 150;
 var w = (599-x)/len;
 var s = w*0.2;
 var DS = 0; //点間隔
- 
-for(var i=0; i < len; i++) { 
-    console.log(bottom-h*max[i]/MAX);
+
+for(var i=0; i < len; i++) {
     var y1= bottom-h*max[i]/MAX;
     cp.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
     var y2 = bottom-h*min[i]/MAX;
@@ -287,13 +277,12 @@ for(var i=0; i < len; i++) {
     var y4 = bottom-h*lq[i]/MAX;
     cp.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     var y5 = bottom-h*med[i]/MAX;
-    cp.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値 
+    cp.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値
 if(y1 < y5 + 6)
-    
-    cp.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS); 
-    cp.drawLine(w*i+x, y3, w*i+x, y4); 
-    cp.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);  
-    cp.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS); 
+    cp.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);
+    cp.drawLine(w*i+x, y3, w*i+x, y4);
+    cp.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);
+    cp.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);
     cp.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620);
     cp.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);
 }

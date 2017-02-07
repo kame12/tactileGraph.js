@@ -326,6 +326,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     var int;
     if(Adjust){
       int = d/dotted;
+      console.log(int);
     }else{
       int = interval;
     }
