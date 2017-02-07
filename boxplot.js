@@ -212,23 +212,40 @@ var w = (599-x)/len;
 var s = w*0.2;
 var DS = 6; //点間隔
 
+tg.setDot(1);
 for(var i=0; i < len; i++) {
     var y1= bottom-h*max[i]/MAX;
-    tg.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
     var y2 = bottom-h*min[i]/MAX;
-    tg.drawLine(w*i+x, y2, w*(i+1)-s+x, y2);//最小値
     var y3 = bottom-h*uq[i]/MAX;
-    tg.drawLine(w*i+x, y3, w*(i+1)-s+x, y3); //第1四分位
     var y4 = bottom-h*lq[i]/MAX;
-    tg.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     var y5 = bottom-h*med[i]/MAX;
-    tg.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値
-    tg.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);
-    tg.drawLine(w*i+x, y3, w*i+x, y4);
-    tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);
-    tg.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);
-    tg.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620);
-    tg.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);
+    if(y1 < y5-DS){
+      tg.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
+    }
+    if(y2 > y5+DS && y2 < bottom - DS){
+      tg.drawLine(w*i+x, y2, w*(i+1)-s+x, y2);//最小値
+    }
+    if(y3 < y5-DS && y3 > y1 + DS){
+      tg.drawLine(w*i+x, y3, w*(i+1)-s+x, y3); //第1四分位
+    }
+    if(y4 > y5-DS && y4 < y2 - DS){
+      tg.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
+    }
+    if(y5 < bottom - DS){
+      tg.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値
+    }
+    if((y3-DS)-(y1+DS) > 6){
+      tg.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);//上部のヒゲの縦線
+    }
+    tg.drawLine(w*i+x, y3, w*i+x, y5);              //箱の左の縦線
+    tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y5);  //箱の右の縦線
+    tg.drawLine(w*i+x, y5, w*i+x, y4);              //箱の左の縦線
+    tg.drawLine(w*(i+1)-s+x, y5, w*(i+1)-s+x, y4);  //箱の右の縦線
+    if((y2-DS)-(y4+DS) > 6){
+      tg.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);//下部のヒゲの縦線
+    }
+    tg.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620); //グラフ下のポイント線
+    tg.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);  //要素の名称
 }
 
 var scale = 0;  //グラフ目盛
@@ -260,7 +277,6 @@ var h = bottom - top;
 var MAX = Math.max.apply(null, max);
 
 var hoge = cp.drawBraille(filename,0,0);
-console.log(hoge); 
 var x = 150;
 var w = (599-x)/len;
 var s = w*0.2;
@@ -268,23 +284,22 @@ var DS = 0; //点間隔
 
 for(var i=0; i < len; i++) {
     var y1= bottom-h*max[i]/MAX;
-    cp.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
     var y2 = bottom-h*min[i]/MAX;
-    cp.drawLine(w*i+x, y2, w*(i+1)-s+x, y2);//最小値
     var y3 = bottom-h*uq[i]/MAX;
-    cp.drawLine(w*i+x, y3, w*(i+1)-s+x, y3); //第1四分位
     var y4 = bottom-h*lq[i]/MAX;
-    cp.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     var y5 = bottom-h*med[i]/MAX;
+    if(y1>y5+DS)cp.drawLine(w*i+x, y1, w*(i+1)-s+x, y1);//最大値
+    cp.drawLine(w*i+x, y2, w*(i+1)-s+x, y2);//最小値
+    cp.drawLine(w*i+x, y3, w*(i+1)-s+x, y3); //第1四分位
+    cp.drawLine(w*i+x, y4, w*(i+1)-s+x, y4); //第3四分位
     cp.drawLine(w*i+x+DS, y5, w*(i+1)-s+x-DS, y5); //中央値
     cp.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);
     cp.drawLine(w*i+x, y3, w*i+x, y4);
     cp.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y4);
     cp.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);
-    cp.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620);
+    cp.drawLine(w*i+(w-s)/2+x, 600, w*i+(w-s)/2+x, 620);
     cp.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);
 }
-
 var scale = 0;  //グラフ目盛
 if(MAX < 1)scale=1;
 if(1 <= MAX && MAX < 5)scale=5;

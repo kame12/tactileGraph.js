@@ -33,6 +33,13 @@ var capsule = function(id){
     cx.stroke();
   },
 
+  drawDot:function(x, y) {
+    cx.beginPath();
+    cx.arc(x, y, 2, 0, Math.PI*2, false);
+    cx.fill();
+    console.log(x + y)
+  },
+
   setDot:function(num){
     switch(num){
       case 0: cx.lineWidth=3;
