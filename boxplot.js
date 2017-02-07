@@ -237,10 +237,10 @@ for(var i=0; i < len; i++) {
     if((y3-DS)-(y1+DS) > 6){
       tg.drawLine(w*i+(w-s)/2+x, y1+DS, w*i+(w-s)/2+x, y3-DS);//上部のヒゲの縦線
     }
-    tg.drawLine(w*i+x, y3, w*i+x, y5);              //箱の左の縦線
-    tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y5);  //箱の右の縦線
-    tg.drawLine(w*i+x, y5, w*i+x, y4);              //箱の左の縦線
-    tg.drawLine(w*(i+1)-s+x, y5, w*(i+1)-s+x, y4);  //箱の右の縦線
+    tg.drawLine(w*i+x, y3, w*i+x, y5);              //箱の左の第1四分位から中央値までの縦線
+    tg.drawLine(w*(i+1)-s+x, y3, w*(i+1)-s+x, y5);  //箱の右の第1四分位から中央値までの縦線
+    tg.drawLine(w*i+x, y5, w*i+x, y4);              //箱の左の中央値から第3四分位までの縦線
+    tg.drawLine(w*(i+1)-s+x, y5, w*(i+1)-s+x, y4);  //箱の右の中央値から第3四分位までの縦線
     if((y2-DS)-(y4+DS) > 6){
       tg.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);//下部のヒゲの縦線
     }
