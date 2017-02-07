@@ -1,3 +1,4 @@
+
 var file = document.querySelector('#getfile'); //htmlの「ファイルを開く」のIDを設定
 var txt = document.querySelector('#txt');      //htmlのテキストエリアのIDを設定
 var tg = tactileGraphic(); // tactileGraph.jsの設定
@@ -171,6 +172,8 @@ function makeMed(numArray) {  /// 中央値
 
 function drawGraph(){//////// ＊ここからが実行開始///////////////////////
   tg.clear(); //既に書いてある内容をクリア
+  cp.clear();
+
   arr = createArray(txt.value);  //テキストエリアの中身
   numArray = createnumArray(arr); 
   max = [];
@@ -321,7 +324,7 @@ var esa = document.querySelector('#esa');
 var capsule = document.querySelector('#capsule');
 
 edl.onclick = function() {
-  var blob = new Blob([ graph.loadEdl() ], { "type" : "text/plain" });
+  var blob = new Blob([ tg.loadEdl() ], { "type" : "text/plain" });
   if (window.navigator.msSaveBlob) { 
     window.navigator.msSaveBlob(blob, filename + ".edl"); 
   } else {
@@ -349,7 +352,6 @@ esa.onclick = function(){
 
 capsule.onclick = function(){
   imgURL = cp.loadImage();
-  console.log(imgURL);
   var bin = atob(imgURL.split(',')[1]);
   var buffer = new Uint8Array(bin.length);
   for (var i = 0; i < bin.length; i++) {

@@ -10,6 +10,12 @@ var capsule = function(id){
   cx.textBaseline = "top";
 
  return {
+  clear: function(){
+    cx.fillStyle = "white";
+    cx.fillRect(0,0,1654,2339);
+    cx.fillStyle = "black";
+  },
+
   drawBraille:function(str, x, y, returnX){
     cx.fillText( str, x*RATIO, y*RATIO);
     
@@ -30,8 +36,8 @@ var capsule = function(id){
   setDot:function(num){
     switch(num){
       case 0: cx.lineWidth=1;break;
-      case 1: cx.lineWidth=3;break;
-      case 2: cx.lineWidth=5;break;
+      case 1: cx.lineWidth=4;break;
+      case 2: cx.lineWidth=7;break;
     }
   },
 
