@@ -35,11 +35,11 @@ var capsule = function(id){
 
   setDot:function(num){
     switch(num){
-      case 0: cx.lineWidth=1;
+      case 0: cx.lineWidth=3;
               cx.setLineDash([5, 5]);break;
-      case 1: cx.lineWidth=4;
+      case 1: cx.lineWidth=8;
               cx.setLineDash([0]);break;
-      case 2: cx.lineWidth=7;
+      case 2: cx.lineWidth=12;
               cx.setLineDash([0]);break;
     }
   },
