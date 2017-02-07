@@ -35,9 +35,8 @@ var capsule = function(id){
 
   drawDot:function(x, y) {
     cx.beginPath();
-    cx.arc(x, y, 2, 0, Math.PI*2, false);
+    cx.arc(x*RATIO, y*RATIO, 2, 0, Math.PI*2, false);
     cx.fill();
-    console.log(x + y)
   },
 
   setDot:function(num){
