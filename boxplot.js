@@ -260,6 +260,22 @@ tg.drawBraille(scale, 30, 40);
 tg.drawBraille(Math.floor(scale/2), 30, 320);
 tg.setInterval(8);
 tg.setDot(0);
+var j=0;
+var flag=false;
+for(var i=100; i<600; i+=GS) {
+		if(w*j+x < i) {
+		   if(i > w*(j+1)-s+x) {
+		   	  if(flag = false){
+	    	  j++; flag = true;
+	    	  }	    	  
+	       }
+		   else {flag = false; break; 
+		   }
+	    }
+	      tg.drawDot(i,400);
+	    console.log(j);
+	
+}
 tg.drawLine(100+DS,40,600,40); //グリッド線
 tg.drawLine(100+DS,180,600,180);
 tg.drawLine(100+DS,320,600,320);
