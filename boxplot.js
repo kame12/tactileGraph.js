@@ -2,6 +2,7 @@
 var file = document.querySelector('#getfile'); //htmlの「ファイルを開く」のIDを設定
 var txt = document.querySelector('#txt');      //htmlのテキストエリアのIDを設定
 var tg = tactileGraphic(); // tactileGraph.jsの設定
+tg.setAdjust = true;
 var cp = capsule('b');
 tg.setCanvas('a');         // HTMLのCanvasのIDを設定
 var arr=[];        //初期配列

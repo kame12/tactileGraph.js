@@ -315,12 +315,12 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     }
     this.drawBraille(str, x,y);
   },
-
+/////////////////////////////////////////////////////////////////////////////////////
   drawLine:function(x1, y1, x2, y2) {     ///////点線の描画処理//////
     if(y2 === undefined)return this.drawLine(fromX, fromY, x1, y1);
     fromX = x2;
     fromY = y2;
-    var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)); //distance
     var rad = Math.atan2(y2 - y1, x2 - x1);
     var dotted = Math.floor(d / interval);
     var int;
