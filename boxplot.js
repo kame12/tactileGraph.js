@@ -180,7 +180,8 @@ function drawGraph(){//////// ＊ここからが実行開始////////////////////
 /////////////////////////// 以下にグラフの描画処理///////////////////////////////
 /*tg.drawBraiile("boxplot",10,5); */
 tg.drawLine(100, 30, 100, 630);   //縦軸//
-tg.drawLine(85, 600, 600, 600);   //横軸//
+tg.drawLine(100, 600, 600, 600);   //横軸//
+tg.drawLine(85, 600, 100, 600);   //横軸//
 
 var len = numArray.length;
 var top = 70;	
@@ -227,7 +228,7 @@ for(var i=0; i < len; i++) {
     if((y2-DS)-(y4+DS) > 6){
       tg.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);//下部のヒゲの縦線
     }
-    tg.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620); //グラフ下のポイント線
+    tg.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 617); //グラフ下のポイント線
     tg.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);  //要素の名称
 }
 
@@ -327,7 +328,7 @@ for(var i=0; i < len; i++) {
     if((y2-DS)-(y4+DS) > 6){
       cp.drawLine(w*i+(w-s)/2+x, y4+DS, w*i+(w-s)/2+x, y2-DS);//下部のヒゲの縦線
     }
-    cp.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 620); //グラフ下のポイント線
+    cp.drawLine(w*i+(w-s)/2+x, 600, w*i+(w-s)/2+x, 620); //グラフ下のポイント線
     cp.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);  //要素の名称
 }
 
