@@ -12,6 +12,8 @@ var lq=[];    //第1四分位
 var uq=[];    //第3四分位
 var min=[];   //最小値
 var med=[];   //中央値
+var ave=[];   //平均値値
+var std=[];   //標準偏差
 
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -40,6 +42,39 @@ function createnumArray(arr) { ///CSVテキストから配列を作成
   }
   return narr;
 }
+////////////////////////////////統計量の計算///////////////////////////////////////////////
+/* 
+ * 平均を求める
+ */
+function average(data){
+    var sum = 0;
+    for (i=0; i<data.length; i++) {
+      sum = sum + data[i];
+    }
+    return (sum / data.length);
+}
+ 
+/*
+ * 分散を求める
+ * 分散 ＝（（データ－平均値）の２乗）の総和 ÷ 個数
+ */
+function variance(data){
+    var ave = average(data);  // 平均値を求める
+    var varia = 0;
+    for (i=0; i<data.length; i++) {
+        varia = varia + Math.pow(data[i] - ave, 2);
+    }
+    return (varia / data.length);
+}
+ 
+/*
+ * 標準偏差を求める
+ */
+function standard_deviation(data){
+    var varia = variance(data);  // 分散を求める
+    return Math.sqrt(varia);  // 分散の平方根
+}
+/////////////////////////////////////////////////////////////////////////////////
 
       /////関数作成////
 
@@ -174,8 +209,12 @@ function drawGraph(){  //////// ＊ここからが実行開始//////////////////
       uq.push(u);
       me = makeMed(numArray[i]);
       med.push(me);
+      ave.push(average(numArray[i])); //各要素配列の平均を求める
+      std.push(standard_deviation(numArray[i])); //各要素配列の標準偏差を求める
   }
-
+}
+console.log(ave);
+console.log(std);
 /////////////////////////// 以下にグラフの描画処理///////////////////////////////
 /*tg.drawBraiile("boxplot",10,5); */
 tg.drawLine(100, 30, 100, 630);   //縦軸//
@@ -208,8 +247,6 @@ for(var i=0; i < len; i++) {
     var yuq = bottom-h*uq[i]/MAX;
     var ylq = bottom-h*lq[i]/MAX;
     var ymed = bottom-h*med[i]/MAX;
-    console.log(ylq);
-    console.log(ymin);
 
     if(ymax < yuq-DS){
       tg.drawLine(w*i+x, ymax, w*(i+1)-s+x, ymax, 3);//最大値
@@ -376,7 +413,6 @@ for(var i=106; i<600; i+=GS) {
   }
 }
 //////////////////////////////// ここまで ///////////////////////////////////////
-}
 
 /////////////////////////////////////////////////
 //////////////以下、ダウンロード用の設定////////
