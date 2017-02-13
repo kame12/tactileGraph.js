@@ -106,7 +106,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     ctx.fillStyle = color;
   },
 
-  setAdjust(bool){
+  setAdjust:function(bool){
     Adjust=bool;
   },
 
@@ -117,7 +117,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     r = R;
   },
 
-  setType(TYPE){
+  setType:function(TYPE){
     switch(TYPE){
     case "edi":
       this.setBraille(28,5,5,12);
@@ -342,7 +342,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     }
   },
 
-  drawLineTilt(x, y, len, ang) {   ////傾きと長さを指定した点線の描画///
+  drawLineTilt:function(x, y, len, ang) {   ////傾きと長さを指定した点線の描画///
     var temp = ang/180*Math.PI;
     var x1 = x + len*Math.cos(temp);
     var y1 = y + len*Math.sin(temp);
@@ -614,7 +614,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     str = "EDEL" + size + ",0,740" + str;
     return str;
   },
-  aug,
-  aug2
+  aug:aug,
+  aug2:aug2
  };
 };

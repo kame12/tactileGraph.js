@@ -2,6 +2,7 @@ var capsule = function(id){
   var RATIO = 1654 / 599;
   var cvs = document.getElementById(id);
   var cx = cvs.getContext('2d');
+  var style = 'bold 53px "Ikarashi Braille"';
   cx.font= 'bold 53px "Ikarashi Braille"';
   cx.lineWidth=3;
   cx.fillStyle = "white";
@@ -17,13 +18,13 @@ var capsule = function(id){
   },
 
   drawBraille:function(str, x, y, returnX){
-    cx.fillText( str, x*RATIO, y*RATIO);
-    
     cx.fillStyle = "blue";
     cx.font= 'bold 53px "メイリオ"';
     cx.fillText( str, x*RATIO, y*RATIO + 40);
-    cx.font= 'bold 53px "Ikarashi Braille"';
+    cx.font= style;
     cx.fillStyle = "black";
+    str=tg.convertText(str);
+    cx.fillText( str, x*RATIO, y*RATIO);
   },
 
   drawLine:function(x1, y1, x2, y2) {
@@ -50,7 +51,7 @@ var capsule = function(id){
     }
   },
 
-  loadImage(){
+  loadImage:function(){
     return cvs.toDataURL();
   }
  }
