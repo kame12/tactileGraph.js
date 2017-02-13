@@ -30,6 +30,9 @@ function createnumArray(arr) { ///CSVテキストから配列を作成
   for(var i=0; i<arr.length; i++) {
     var nam = arr[i].shift();
     for(var j = 0; j<arr[i].length; j++){
+      if(isNaN(parseInt(arr[i][j]))){
+        alert( "エラーです。入力した値を確認して下さい。" );
+      }
       arr[i][j] = parseInt(arr[i][j]);
     }
     narr.push(arr[i]);
