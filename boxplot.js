@@ -1,8 +1,8 @@
 var file = document.querySelector('#getfile'); //htmlの「ファイルを開く」のIDを設定
 var txt = document.querySelector('#txt');      //htmlのテキストエリアのIDを設定
 var tg = tactileGraphic(); // tactileGraph.jsの設定
-tg.setAdjust(true);
-var cp = capsule('b');
+tg.setAdjust(true); //点間隔の自動調整の設定
+var cp = capsule('b');  //立体コピー画像描画用ライブラリの読み込み
 tg.setCanvas('a');         // HTMLのCanvasのIDを設定
 var arr=[];        //初期配列
 var numArray = []; //数値のみの配列
@@ -27,16 +27,16 @@ function createArray(csvData) { ///CSVテキストから配列を作成
 
 function createnumArray(arr) { ///CSVテキストから配列を作成
   var narr=[];
-  for(var i=0; i<arr.length; i++) {
+  for(var i=0; i<arr.length; i++) {    //数値配列切り出し
     var nam = arr[i].shift();
     for(var j = 0; j<arr[i].length; j++){
       if(isNaN(parseInt(arr[i][j]))){
-        alert( "エラーです。入力した値を確認して下さい。" );
+        alert( "エラーです。入力した値を確認して下さい。" );  //数値が読み取れない場合の警告表示
       }
       arr[i][j] = parseInt(arr[i][j]);
     }
     narr.push(arr[i]);
-    tag.push(nam);
+    tag.push(nam); //名前配列の作成
   }
   return narr;
 }
@@ -48,7 +48,7 @@ function makeLQ(numArray) {   ///第1四分位数
     return a-b;
   }	
   var mlq ="initial";
-  numArray = numArray.sort(compare);  //昇順
+  numArray = numArray.sort(compare);  //昇順に並べ替え
 
  if(numArray.length === 1) {
    return numArray[0];
@@ -59,7 +59,6 @@ function makeLQ(numArray) {   ///第1四分位数
    var min = numArray[0];
    var med = (numArray[0] + numArray[1]) / 2;
  }
-
 
  if(numArray.length === 3) {
    var max = numArray[2];
@@ -153,7 +152,7 @@ function makeMed(numArray) {  /// 中央値
   return med;
 }
 
-function drawGraph(){//////// ＊ここからが実行開始///////////////////////
+function drawGraph(){  //////// ＊ここからが実行開始///////////////////////
   tg.clear(); //既に書いてある内容をクリア
   cp.clear();
 
@@ -290,7 +289,6 @@ for(var i=106; i<600; i+=GS) {  /////グリッド線の描画
   }
 }
 /////////////////////////// 以下に立体コピーの描画処理///////////////////////////////
-/*tg.drawBraiile("boxplot",10,5); */
 cp.drawLine(100, 30, 100, 630);   //縦軸//
 cp.drawLine(85, 600, 600, 600);   //横軸//
 
