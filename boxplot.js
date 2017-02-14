@@ -291,15 +291,16 @@ for(var i=0; i < len; i++) {
 }
 
 tg.drawLine(88, 40, 100-DS, 40); //上部の目盛り
-tg.drawBraille(MAX, 30, 40);
+tg.drawBrailleRight(MAX, 75, 40);
 
 var gy = top + h/2;     ///////////////グリッドの高さの指定
 tg.drawLine(88, gy, 100-DS, gy); //中段の目盛り
-tg.drawBraille(MAX/2, 30, 320);
-tg.setDot(0);
+tg.drawBrailleRight(MAX/2, 75, 320);
 
 tg.drawLine(88, 40, 100-DS, 40); //ゼロの目盛り
-tg.drawBraille("0", 45, bottom);
+tg.drawBrailleRight("0", 75, bottom);
+
+tg.setDot(0);
 var j=0;
 
 var flag=true;
@@ -382,16 +383,16 @@ for(var i=0; i < len; i++) {
 }
 
 cp.drawLine(88, 40, 100-DS, 40); //上部の目盛り
-cp.drawBraille(MAX, 20, 40);
+cp.drawBrailleRight(MAX, 75, 40);
 
-var gy = top + h/2; ///////////////グリッドの高さの指定
+var gy = top + h/2;     ///////////////グリッドの高さの指定
 cp.drawLine(88, gy, 100-DS, gy); //中段の目盛り
-cp.drawBraille(MAX/2, 20, 320);
-cp.setDot(0);
+cp.drawBrailleRight(MAX/2, 75, 320);
 
 cp.drawLine(88, 40, 100-DS, 40); //ゼロの目盛り
-cp.drawBraille("0", 35, bottom);
+cp.drawBrailleRight("0", 75, bottom);
 
+cp.setDot(0);
 var j=0;
 var flag=true;
 

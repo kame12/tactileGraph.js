@@ -28,6 +28,14 @@ var capsule = function(id){
     cx.fillText( str, x*RATIO, y*RATIO);
   },
 
+  drawBrailleRight:function(str, x, y){
+    var tmpstr = tg.convertText(str);
+    tmpstr = tg.convertBrailleMath(tmpstr);
+    x -= (tmpstr.length * 15) + 12;
+    this.drawBraille(str, x, y);
+    console.log(x);
+  },
+
   drawLine:function(x1, y1, x2, y2) {
     cx.beginPath();
     cx.moveTo(x1*RATIO, y1*RATIO);
