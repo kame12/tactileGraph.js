@@ -30,6 +30,7 @@ function createArray(csvData) { ///CSVテキストから配列を作成
 
 function createnumArray(arr) { ///CSVテキストから配列を作成
   var narr=[];
+  tag = [];
   for(var i=0; i<arr.length; i++) {    //数値配列切り出し
     var nam = arr[i].shift();
     for(var j = 0; j<arr[i].length; j++){
@@ -218,7 +219,7 @@ console.log(ave);
 console.log(std);
 /////////////////////////// 以下にグラフの描画処理///////////////////////////////
 /*tg.drawBraiile("boxplot",10,5); */
-tg.drawLine(100, 30, 100, 630);   //縦軸//
+tg.drawLine(100, 30, 100, 600);   //縦軸//
 tg.drawLine(100, 600, 600, 600);   //横軸//
 tg.drawLine(85, 600, 100, 600);   //横軸//
 
@@ -259,18 +260,22 @@ for(var i=0; i < len; i++) {
 
     if(yuq <= ymed-DS){
       tg.drawLine(w*i+x, yuq, w*(i+1)-s+x, yuq); //第1四分位
-      tg.drawLine(w*i+x, yuq, w*i+x, ymed, 3);              //箱の左の第1四分位から中央値までの縦線
-      tg.drawLine(w*(i+1)-s+x, yuq, w*(i+1)-s+x, ymed, 3);  //箱の右の第1四分位から中央値までの縦線
+      tg.drawLine(w*i+x, yuq, w*i+x, ymed-1, 3);              //箱の左の第1四分位から中央値までの縦線
+      tg.drawLine(w*(i+1)-s+x, yuq, w*(i+1)-s+x, ymed-1, 3);  //箱の右の第1四分位から中央値までの縦線
     }
 
     if(ylq >= ymed-DS){
       tg.drawLine(w*i+x, ylq, w*(i+1)-s+x, ylq); //第3四分位
-      tg.drawLine(w*i+x, ymed, w*i+x, ylq, 3);              //箱の左の中央値から第3四分位までの縦線
-      tg.drawLine(w*(i+1)-s+x, ymed, w*(i+1)-s+x, ylq, 3);  //箱の右の中央値から第3四分位までの縦線
+      tg.drawLine(w*i+x, ymed+1, w*i+x, ylq, 3);              //箱の左の中央値から第3四分位までの縦線
+      tg.drawLine(w*(i+1)-s+x, ymed+1, w*(i+1)-s+x, ylq, 3);  //箱の右の中央値から第3四分位までの縦線
     }
 
     if(ymed < bottom - DS){
+      tg.setDot(2);
+      tg.setInterval(7);
       tg.drawLine(w*i+x, ymed, w*(i+1)-s+x, ymed); //中央値
+      tg.setDot(1);
+      tg.setInterval(6);
     }
 
     if((yuq-DS)-(ymax+DS) > 0){
@@ -282,7 +287,7 @@ for(var i=0; i < len; i++) {
     }
 
     tg.drawLine(w*i+(w-s)/2+x, 605, w*i+(w-s)/2+x, 617); //グラフ下のポイント線
-    tg.drawBraille(tag[i], w*i+(w-s)/2+x-10, 630);  //要素の名称
+    tg.drawBrailleMath(tag[i], w*i+(w-s)/2+x-10, 630);  //要素の名称
 }
 
 tg.drawLine(88, 40, 100-DS, 40); //上部の目盛り
@@ -293,7 +298,10 @@ tg.drawLine(88, gy, 100-DS, gy); //中段の目盛り
 tg.drawBraille(MAX/2, 30, 320);
 tg.setDot(0);
 
+tg.drawLine(88, 40, 100-DS, 40); //ゼロの目盛り
+tg.drawBraille("0", 45, bottom);
 var j=0;
+
 var flag=true;
 
 for(var i=106; i<600; i+=GS) {  /////グリッド線の描画
@@ -327,7 +335,9 @@ for(var i=106; i<600; i+=GS) {  /////グリッド線の描画
   }
 }
 /////////////////////////// 以下に立体コピーの描画処理///////////////////////////////
-cp.drawLine(100, 30, 100, 630);   //縦軸//
+
+cp.setDot(1);
+cp.drawLine(100, 30, 100, 600);   //縦軸//
 cp.drawLine(85, 600, 600, 600);   //横軸//
 
 var hoge = cp.drawBraille(filename,0,0);
@@ -336,7 +346,6 @@ var w = (599-x)/len;
 var s = w*0.3;
 DS = 0; //点間隔
 
-cp.setDot(1);
 for(var i=0; i < len; i++) {
     var ymax= bottom-h*max[i]/MAX;
     var ymin = bottom-h*min[i]/MAX;
@@ -373,12 +382,15 @@ for(var i=0; i < len; i++) {
 }
 
 cp.drawLine(88, 40, 100-DS, 40); //上部の目盛り
-cp.drawBraille(MAX, 30, 40);
+cp.drawBraille(MAX, 20, 40);
 
 var gy = top + h/2; ///////////////グリッドの高さの指定
 cp.drawLine(88, gy, 100-DS, gy); //中段の目盛り
-cp.drawBraille(MAX/2, 30, 320);
+cp.drawBraille(MAX/2, 20, 320);
 cp.setDot(0);
+
+cp.drawLine(88, 40, 100-DS, 40); //ゼロの目盛り
+cp.drawBraille("0", 35, bottom);
 
 var j=0;
 var flag=true;
@@ -414,11 +426,13 @@ for(var i=106; i<600; i+=GS) {
   }
 }
 //////////////////////////////// テキストエリアに結果を描画する ///////////////////////////////////////
-var str = "要素名,最大値,第一四分位,中央値,第三四分位,最低値\n";
-for(var i = 0; i<max.length; i++){
-  str += tag[i] + ", " + max[i] + ", " + uq[i] + ", " + med[i] + ", " + lq[i] + ", " + min[i] + "\n";
-}
-txt2.value = str;
+if(txt.value !== ""){
+  var str = "要素名,最大値,第一四分位,中央値,第三四分位,最低値\n";
+  for(var i = 0; i<max.length; i++){
+    str += tag[i] + ", " + max[i] + ", " + uq[i] + ", " + med[i] + ", " + lq[i] + ", " + min[i] + "\n";
+  }
+    txt2.value = str;
+  }
 }
 /////////////////////////////////////////////////
 //////////////以下、ダウンロード用の設定////////

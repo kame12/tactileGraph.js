@@ -289,6 +289,11 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
   },
 
   drawBrailleMath:function(str, x, y){
+    str = this.convertBrailleMath(str);
+    this.drawBraille(str, x, y);
+  },
+
+  convertBrailleMath:function(str){
     var code =[["Α","‡a"],["Β","‡b"],["Δ","‡c"],["Ε","‡e"],
               ["Φ","‡f"],["Γ","‡g"],["Ι","‡i"],["Κ","‡k"],
               ["Λ","‡l"],["Μ","‡m"],["Ν","‡n"],["Ο","‡o"],
@@ -301,7 +306,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
               ["π","†p"],["ρ","†r"],["σ","†s"],["τ","†ｔ"],
               ["υ","†y"],["ω","†w"],["ξ","†x"],["ψ","†y"],
               ["ζ","†z"],["η","†さ"],["θ","†す"],["χ","†へ"],
-              ["\＋","？"],["－","を"],["×","＊"],["÷","分"],
+              ["\＋","？"],["－","を"],["×","カ"],["÷","分"],
               ["・","わ"],["／","｜分"],["\/","｜分"],["±","？を"],
               ["：","中促"],["\＝","ーー"],["≒","中ー"],["≠","‡ー"],
               ["=","ーー"],["＞","？？"],["＜","をを"],["\>","？？"],
@@ -313,12 +318,12 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
               ["∩","く"],["→","ーた"],["←","こー"],["√","根"],
               ["！","外！"],["\!","外！"],["\\(","語"],["\\)","ん"],
               ["\\[","半み"],["\\]","もわ"]];
-    var len = code[0].length;
+    var len = code.length;
     for(var i=0; i<len; i++){
       var regex = new RegExp(code[i][0], "g");
       str=str.replace(regex,code[i][1]);
     }
-    this.drawBraille(str, x,y);
+    return str;
   },
 /////////////////////////////////////////////////////////////////////////////////////
   drawLine:function(x1, y1, x2, y2, flag) {     ///////点線の描画処理//////

@@ -18,12 +18,13 @@ var capsule = function(id){
   },
 
   drawBraille:function(str, x, y, returnX){
-    cx.fillStyle = 'rgb(240,240,240)';
+    cx.fillStyle = "blue";
     cx.font= 'bold 53px "メイリオ"';
     cx.fillText( str, x*RATIO, y*RATIO + 40);
     cx.font= style;
     cx.fillStyle = "black";
     str=tg.convertText(str);
+    str=tg.convertBrailleMath(str);
     cx.fillText( str, x*RATIO, y*RATIO);
   },
 
