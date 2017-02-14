@@ -236,7 +236,7 @@ for (var i=2;i<no;i++){
 }
 
 var hoge = tg.drawBraille(filename,0,0);
-var x = 150;
+var x = 130;
 var w = (599-x)/len;
 var s = w*0.4; //箱ヒゲの間隔
 var DS = 6; //点間隔
@@ -493,7 +493,7 @@ file.onchange = function (){   //ファイル選択時に呼ばれる
     var reader = new FileReader();
     reader.readAsArrayBuffer(fileList[0]);//読み込み  Uncaught TypeError: Failed to execute
     reader.onload = function  () {
-      filename =file.name;
+      filename =fileList[0].name;
       var array = new Uint8Array(reader.result);
       var uniArray = Encoding.convert(array, 'UNICODE','AUTO');//配列を「ユニコード」に変換
       var result = Encoding.codeToString(uniArray);  
