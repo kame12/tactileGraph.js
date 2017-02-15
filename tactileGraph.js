@@ -254,14 +254,14 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
       alert("文字列に点字に変換出来ない文字が含まれています。");
       return "none";
     }
+    if(right===true){  //右寄せのチェック
+      x -= arr.length * r-8;
+      right = false;
+    }
     return this.arr2braille(arr,x,y,returnX);
   },
 
   arr2braille:function(arr,x,y,returnX){ //点字の描画処理/
-    if(right===true){  //右寄せ
-      x -= arr.length * r-8;
-      right = false;
-    }
     var k = 0;
     var j = k;
     for(var i = 0 ; i < arr.length ; i++){         //>

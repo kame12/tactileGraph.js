@@ -33,7 +33,6 @@ var capsule = function(id){
     tmpstr = tg.convertBrailleMath(tmpstr);
     x -= (tmpstr.length * 15) + 12;
     this.drawBraille(str, x, y);
-    console.log(x);
   },
 
   drawLine:function(x1, y1, x2, y2) {

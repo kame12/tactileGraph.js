@@ -215,8 +215,6 @@ function drawGraph(){  //////// ＊ここからが実行開始//////////////////
       std.push(standard_deviation(numArray[i])); //各要素配列の標準偏差を求める
   }
 
-console.log(ave);
-console.log(std);
 /////////////////////////// 以下にグラフの描画処理///////////////////////////////
 /*tg.drawBraiile("boxplot",10,5); */
 tg.drawLine(100, 30, 100, 600);   //縦軸//
@@ -494,6 +492,10 @@ file.onchange = function (){   //ファイル選択時に呼ばれる
     reader.readAsArrayBuffer(fileList[0]);//読み込み  Uncaught TypeError: Failed to execute
     reader.onload = function  () {
       filename =fileList[0].name;
+
+      var reg=/(.*)(?:\.([^.]+$))/;
+      filename = filename.match(reg)[1];
+
       var array = new Uint8Array(reader.result);
       var uniArray = Encoding.convert(array, 'UNICODE','AUTO');//配列を「ユニコード」に変換
       var result = Encoding.codeToString(uniArray);  
